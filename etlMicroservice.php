@@ -53,3 +53,4 @@ $xml = new \SimpleXMLElement($xml);
 $converter = new TransformXML2JSON();
 $json = $converter->convert2JSONString($xml);
 echo $json;
+?>
