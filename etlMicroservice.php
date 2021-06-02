@@ -5,7 +5,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-include_once 'convertXML.php';
+include_once 'convertXML2.php';
 
 include_once 'XML2JSON.php';
 
@@ -51,5 +51,11 @@ fclose($file);
 
 $xml = new \SimpleXMLElement($xml);
 $converter = new TransformXML2JSON();
-$json = $converter->convert2JSONString($xml);
-echo $json;
+$jsonString = $converter->convert2JSONString($xml);
+
+echo json_encode(json_decode($jsonString, true), JSON_PRETTY_PRINT);
+
+  
+
+?>
+   

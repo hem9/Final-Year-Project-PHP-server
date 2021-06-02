@@ -1,3 +1,5 @@
+"Product","Item","",""
+"ProductID","Item","",""
 "ProductID", "ProductID","itemName","i_name"
 "ProductID", "ProductID","effectiveDate","date_valid_from"
 "Amount", "Amount","value","i_weight"
