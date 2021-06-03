@@ -20,7 +20,7 @@ function transformTags($xml, $oldTag, $newTag, $oldAttribute = null, $newAttribu
     foreach ($domnodes as $node)
     {
 
-    	if($oldTag != $newTag){
+    	if($oldTag != $newTag && $newTag != ""){
 
 	        $newNode = $domDoc->createElement($newTag);
 	        
@@ -36,26 +36,21 @@ function transformTags($xml, $oldTag, $newTag, $oldAttribute = null, $newAttribu
 			    $node->parentNode->replaceChild($newNode, $node);
 
 
-	        // foreach ($node->attributes as $attribute)
-	        // {	
-	        // 	if(($oldAttribute != null || $oldAttribute != "") && $attribute->name == $oldAttribute)
-	        // 		$newNode->setAttribute($newAttribute, $attribute->value);
-	        // 	else	
-	        //     	$newNode->setAttribute($attribute->name, $attribute->value);
-	        // }
-
-	        // foreach ($node->childNodes as $child)
-	        // {
-	        //     $newNode->appendChild($node->removeChild($child));
-	        // }
-
-	        // $node->parentNode->appendChild($newNode);
-	        //$toRemove[] = $node;
+	    
 
     	}
-    	else if($oldTag == $newTag){
+    	else if($oldTag != $newTag && $newTag == ""){
 
-    		//$oldNode = $dom->getElementsByTagName($oldTag);
+    	
+			
+			foreach (iterator_to_array($node->childNodes) as $child) {
+			        $node->parentNode->appendChild($node->removeChild($child));
+			    }
+
+		
+			    $toRemove[] = $node;
+    	}
+    	else if($oldTag == $newTag){
     
 	        if(($oldAttribute != null || $oldAttribute != "") && $node->hasAttribute($oldAttribute)){
 
@@ -70,10 +65,12 @@ function transformTags($xml, $oldTag, $newTag, $oldAttribute = null, $newAttribu
     	}
     }
 
-    // foreach ($toRemove as $node)
-    // {
-    //     $node->parentNode->removeChild($node);
-    // }
+    if(count($toRemove) > 0){
+    	foreach ($toRemove as $node)
+		    {
+		        $node->parentNode->removeChild($node);
+		    }
+	}
 
     return $domDoc->saveXML();
 }

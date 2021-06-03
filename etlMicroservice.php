@@ -51,17 +51,11 @@ fclose($file);
 
 $xml = new \SimpleXMLElement($xml);
 $converter = new TransformXML2JSON();
-<<<<<<< HEAD
 $jsonString = $converter->convert2JSONString($xml);
 
 echo json_encode(json_decode($jsonString, true), JSON_PRETTY_PRINT);
 
   
 
+
 ?>
-   
-=======
-$json = $converter->convert2JSONString($xml);
-echo $json;
-?>
->>>>>>> f56b080ca04b6ce5ca8d513407b7c52e91fffd8b
